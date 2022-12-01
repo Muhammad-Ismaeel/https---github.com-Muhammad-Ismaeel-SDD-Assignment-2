@@ -6,7 +6,6 @@ def mainmenu():  # MAIN MENU FUNCTION ##
     print('3. Show high scores')
     print()
     print('0. Exit')
-    print()
 
 
 # while loop to run the game
