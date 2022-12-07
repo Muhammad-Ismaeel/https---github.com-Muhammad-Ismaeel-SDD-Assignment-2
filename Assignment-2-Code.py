@@ -43,11 +43,13 @@ map = [['   ', '   ', '   ', '   ', '   ', '   ', '   ', '   ', '   ', '   ', ' 
            '   ', '   ', '   ', '   ', '   ', '   ', '   ', '   ', '   ', '   ']
        ]
 
-buildings = ['R', 'I', 'C', 'O', '*']
+buildings = ['R  ', 'I  ', 'C  ', 'O  ', '*  ']
+letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I',
+           'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T']
 
 
 def generatebuildings():
-    buildings_1 = ['R', 'I', 'C', 'O', '*']
+    buildings_1 = ['R  ', 'I  ', 'C  ', 'O  ', '*  ']
     first_opt = buildings[random.randint(0, 4)]
     to_pop = buildings_1.index(first_opt)
     buildings_1.pop(to_pop)
@@ -76,13 +78,52 @@ def selectbuilding(list_options):
     return selected
 
 
+def placebuildings(selected, turn):
+    x = 1
+    while x > 0:
+        to_build = input("Where do you want to build? ")
+        to_build = to_build.upper()
+        if to_build[0] not in letters:
+            print("You have selected an invalid location.\n")
+            continue
+        else:
+            player_column = letters.index(to_build[0])
+            if to_build[-2] in letters:
+                player_row = int(to_build[-1]) - 1
+            else:
+                player_row = int(to_build[-2:]) - 1
+            if turn > 1:
+                if map[player_row][player_column-1] != '    ' or map[player_row][player_column+1] != '    ' or map[player_row-1][player_column] != '    ' or map[player_row+1][player_column] != '    ':
+                    if map[player_row][player_column] == '   ':
+                        map[player_row][player_column] = selected
+                        break
+                    else:
+                        print(
+                            "You have selected a location with a building already.\n")
+                        continue
+                else:
+                    print("You must build next to an existing building.\n")
+                    continue
+            else:
+                if map[player_row][player_column] == '   ':
+                    map[player_row][player_column] = selected
+
+                    break
+                else:
+                    print("You have selected a location with a building already.\n")
+                    continue
+    return map
+
+
 def printmap(map):
+    print('{:5}{:5}{:5}{:5}{:5}{:5}{:5}{:5}{:5}{:5}{:5}{:5}{:5}{:5}{:5}{:5}{:5}{:5}{:5}{:5}{:5}'.format(
+        ' ', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T'))
     print('-------------------------------------------------------------------------------------------------------')
     for row in range(0, 20):  # only printing row 1 to 4 so range is between (1,5)
         if row < 9:
-            print(row + 1, '', end='| ')
+            print(row + 1, ' ', end='| ')
         else:
-            print(row + 1, end='| ')
+            print(row + 1, '', end='| ')
         for column in range(0, 20):  # only printing column 1 to 4 so range is between (1,5)
 
             # spacing for " , end= ' | ' " different for empty space and with a building
@@ -100,27 +141,33 @@ def mainmenu():  # MAIN MENU FUNCTION ##
 
 
 def playgame():
+    turn = 1
     printmap(map)
-    generatebuildings()
-    selectbuilding(generatebuildings())
+    while turn > 0:
+        generatebuildings()
+        placebuildings(selectbuilding(generatebuildings()), turn)
+        turn += 1
+        printmap(map)
 
 
 # while loop to run the game
 i = 1
+mainmenu()
+choice = int(input("What is your choice? "))
 while (i > 0):
-    mainmenu()
-    choice = int(input("What is your choice? "))
     if choice == 1:
         print('Game started!')
+        print()
         playgame()
     elif choice == 2:
         print("Game Loaded!")
+        print()
     elif choice == 3:
         print("Here are your high scores!")
+        print()
     elif choice == 0:
         print("Goodbye!")
         break
     else:
         print("Please input a valid input")
         continue
-        
