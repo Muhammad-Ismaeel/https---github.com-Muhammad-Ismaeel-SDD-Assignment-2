@@ -117,5 +117,10 @@ while (i > 0):
         print("Game Loaded!")
     elif choice == 3:
         print("Here are your high scores!")
-    else:
+    elif choice == 0:
+        print("Goodbye!")
         break
+    else:
+        print("Please input a valid input")
+        continue
+        
