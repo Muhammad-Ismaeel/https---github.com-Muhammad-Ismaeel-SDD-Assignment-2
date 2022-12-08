@@ -170,3 +170,22 @@ while (i > 0):
     else:
         print("Please input a valid input")
         continue
+
+def parkscore():
+    totalparkscore = 0
+    parkposition = []
+    parklist = []
+    for column in range(len(map)):
+        for row in range(len(map)):
+            if map[row][column] == "O":
+                parkposition.append([row,column])
+    for n in parkposition:
+        if map[n[0] + 1][n[1]] == "O":
+            totalparkscore += 1
+        if map[n[0]][n[1] + 1] == "O":
+            totalparkscore += 1
+        if map[n[0] - 1][n[1]] == "O":
+            totalparkscore += 1
+        if map[n[0]][n[1] - 1] == "O":
+            totalparkscore += 1
+    return totalparkscore
