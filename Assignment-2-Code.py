@@ -189,3 +189,20 @@ def parkscore():
         if map[n[0]][n[1] - 1] == "O":
             totalparkscore += 1
     return totalparkscore
+
+def highwayscore():
+        totalhighwayscore = 0;
+        highwayposition = []
+        highwaylist = []
+        for column in range(len(map)):
+        for row in range(len(map)):
+            if map[row][column] == "*":
+                highwayposition.append([row,column])
+                for h in highwayposition:
+                    HWYcount = 0
+                    while map[player_row][player_column+HWYcount] == "*":
+                        HWYcount_score += 1
+                        HWY_score = HWYcount
+                   totalhighwayscore = totalhighwayscore + HWY_score
+        return totalhighwayscore
+        
