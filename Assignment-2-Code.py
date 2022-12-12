@@ -205,4 +205,32 @@ def highwayscore():
                             HWY_score = HWYcount
                     totalhighwayscore = totalhighwayscore + HWY_score
         return totalhighwayscore
-        
+
+def commercialscore():
+    totalcommercialcoin = 0
+    totalcommercialscore = 0
+    commercialposition = []
+    commerciallist = []
+    for column in range(len(map)):
+        for row in range(len(map)):
+            if map[row][column] == "C":
+                commercialposition.append([row,column])
+    for n in commercialposition:
+        if map[n[0] + 1][n[1]] == "C":
+            totalcommercialscore += 1
+        if map[n[0]][n[1] + 1] == "C":
+            totalcommercialscore += 1
+        if map[n[0] - 1][n[1]] == "C":
+            totalcommercialscore += 1
+        if map[n[0]][n[1] - 1] == "C":
+            totalcommercialscore += 1
+    for x in commercialposition:
+        if map[n[0] + 1][n[1]] == "R":
+            totalcommercialcoin += 1
+        if map[n[0]][n[1] + 1] == "R":
+            totalcommercialcoin += 1
+        if map[n[0] - 1][n[1]] == "R":
+            totalcommercialcoin += 1
+        if map[n[0]][n[1] - 1] == "R":
+            totalcommercialcoin += 1
+    return totalcommercialcoin,totalcommercialscore
