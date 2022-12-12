@@ -256,3 +256,35 @@ def industryscore():
             totalindustrycoin += 1
 
     return totalindustrycoin,totalindustryscore
+
+def residentialscore():
+    totalresidentialscore = 0
+    residentialposition = []
+    residentiallist = []
+    for column in range(len(map)):
+        for row in range(len(map)):
+            if map[row][column] == "R":
+                residentialposition.append([row,column])
+    for n in residentialposition:
+        if map[n[0] + 1][n[1]] == "I" or map[n[0]][n[1] + 1] == "I" or map[n[0] - 1][n[1]] == "I" or map[n[0]][n[1] - 1] == "I":
+            totalresidentialscore = 1
+
+        if (map[n[0] + 1][n[1]] == "R" or map[n[0] + 1][n[1]] == "C"):
+            totalresidentialscore += 1
+        if map[n[0]][n[1] + 1] == "R" or map[n[0]][n[1] + 1] == "C":
+            totalresidentialscore += 1
+        if map[n[0] - 1][n[1]] == "R" or map[n[0] - 1][n[1]] == "C":
+            totalresidentialscore += 1
+        if map[n[0]][n[1] - 1] == "R" or map[n[0]][n[1] - 1] == "C":
+            totalresidentialscore += 1
+        
+        if map[n[0] + 1][n[1]] == "O":
+            totalresidentialscore += 2
+        if map[n[0]][n[1] + 1] == "O":
+            totalresidentialscore += 2
+        if map[n[0] - 1][n[1]] == "O":
+            totalresidentialscore += 2
+        if map[n[0]][n[1] - 1] == "O":
+            totalresidentialscore += 2
+            
+    return totalresidentialscore
