@@ -234,3 +234,25 @@ def commercialscore():
         if map[n[0]][n[1] - 1] == "R":
             totalcommercialcoin += 1
     return totalcommercialcoin,totalcommercialscore
+
+def industryscore():
+    totalindustrycoin = 0
+    totalindustryscore = 0
+    industryposition = []
+    industrylist = []
+    for column in range(len(map)):
+        for row in range(len(map)):
+            if map[row][column] == "I":
+                industryposition.append([row,column])
+    for n in industryposition:
+        totalindustryscore += 1
+        if map[n[0] + 1][n[1]] == "R":
+            totalindustrycoin += 1
+        if map[n[0]][n[1] + 1] == "R":
+            totalindustrycoin += 1
+        if map[n[0] - 1][n[1]] == "R":
+            totalindustrycoin += 1
+        if map[n[0]][n[1] - 1] == "R":
+            totalindustrycoin += 1
+
+    return totalindustrycoin,totalindustryscore
