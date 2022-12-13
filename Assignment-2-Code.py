@@ -171,37 +171,6 @@ while (i > 0):
         print("Please input a valid input")
         continue
 
-def parkscore():
-    parkscore = 0
-    totalparkscore = 0
-    parkposition = []
-    parklist = []
-    for column in range(len(map)):
-        for row in range(len(map)):
-            if map[row][column] == "O":
-                parkposition.append([row,column])
-    for n in parkposition:
-        if map[n[0] + 1][n[1]] == "O":
-            parkscore += 1
-        if map[n[0]][n[1] + 1] == "O":
-            parkscore += 1
-        if map[n[0] - 1][n[1]] == "O":
-            parkscore += 1
-        if map[n[0]][n[1] - 1] == "O":
-            parkscore += 1
-        parklist.append(parkscore)
-        parkscore -= parkscore
-    
-    for t in parklist:
-        totalparkscore += t
-    parkprint = ' + '.join(str(s) for s in parklist)
-    if totalparkscore != 0:
-        print('{}:{}{}{}'.format(buildings[3],parkprint, ' = ',totalparkscore))
-    elif totalparkscore == 0:
-        print('{}:{}'.format(buildings[3], 0))
-
-    return totalparkscore
-
 def highwayscore():
         totalhighwayscore = 0;
         highwayposition = []
@@ -218,80 +187,6 @@ def highwayscore():
                     totalhighwayscore = totalhighwayscore + HWY_score
         return totalhighwayscore
 
-def commercialscore():
-    commercialscore = 0
-    totalcommercialcoin = 0
-    totalcommercialscore = 0
-    commercialposition = []
-    commerciallist = []
-    for column in range(len(map)):
-        for row in range(len(map)):
-            if map[row][column] == "C":
-                commercialposition.append([row,column])
-    for n in commercialposition:
-        if map[n[0] + 1][n[1]] == "C":
-            commercialscore += 1
-        if map[n[0]][n[1] + 1] == "C":
-            commercialscore += 1
-        if map[n[0] - 1][n[1]] == "C":
-            commercialscore += 1
-        if map[n[0]][n[1] - 1] == "C":
-            commercialscore += 1
-        commerciallist.append(commercialscore)
-        commercialscore -= commercialscore
-    for x in commercialposition:
-        if map[n[0] + 1][n[1]] == "R":
-            totalcommercialcoin += 1
-        if map[n[0]][n[1] + 1] == "R":
-            totalcommercialcoin += 1
-        if map[n[0] - 1][n[1]] == "R":
-            totalcommercialcoin += 1
-        if map[n[0]][n[1] - 1] == "R":
-            totalcommercialcoin += 1
-    
-    for t in commerciallist:
-        totalcommercialscore += t
-    commercialprint = ' + '.join(str(s) for s in commerciallist)
-    if totalcommercialscore != 0:
-        print('{}:{}{}{}'.format(buildings[2],commercialprint, ' = ',totalcommercialscore))
-    elif totalcommercialscore == 0:
-        print('{}:{}'.format(buildings[2], 0))
-
-    return totalcommercialcoin,totalcommercialscore
-
-def industryscore():
-    industryscore = 0
-    totalindustrycoin = 0
-    totalindustryscore = 0
-    industryposition = []
-    industrylist = []
-    for column in range(len(map)):
-        for row in range(len(map)):
-            if map[row][column] == "I":
-                industryposition.append([row,column])
-    for n in industryposition:
-        industryscore += 1
-        if map[n[0] + 1][n[1]] == "R":
-            totalindustrycoin += 1
-        if map[n[0]][n[1] + 1] == "R":
-            totalindustrycoin += 1
-        if map[n[0] - 1][n[1]] == "R":
-            totalindustrycoin += 1
-        if map[n[0]][n[1] - 1] == "R":
-            totalindustrycoin += 1
-        industrylist.append(industryscore)
-        industryscore -= industryscore
-
-    for t in industrylist:
-        totalindustryscore += t
-    industryprint = ' + '.join(str(s) for s in industrylist)
-    if totalindustryscore != 0:
-        print('{}:{}{}{}'.format(buildings[1],industryprint, ' = ',totalindustryscore))
-    elif totalindustryscore == 0:
-        print('{}:{}'.format(buildings[1], 0))
-        
-
-    return totalindustrycoin,totalindustryscore
 
 def residentialscore():
     residentialscore = 0
@@ -335,6 +230,112 @@ def residentialscore():
         print('{}:{}'.format(buildings[0], 0))
             
     return totalresidentialscore
+
+def industryscore():
+    industryscore = 0
+    totalindustrycoin = 0
+    totalindustryscore = 0
+    industryposition = []
+    industrylist = []
+    for column in range(len(map)):
+        for row in range(len(map)):
+            if map[row][column] == "I":
+                industryposition.append([row,column])
+    for n in industryposition:
+        industryscore += 1
+        if map[n[0] + 1][n[1]] == "R":
+            totalindustrycoin += 1
+        if map[n[0]][n[1] + 1] == "R":
+            totalindustrycoin += 1
+        if map[n[0] - 1][n[1]] == "R":
+            totalindustrycoin += 1
+        if map[n[0]][n[1] - 1] == "R":
+            totalindustrycoin += 1
+        industrylist.append(industryscore)
+        industryscore -= industryscore
+
+    for t in industrylist:
+        totalindustryscore += t
+    industryprint = ' + '.join(str(s) for s in industrylist)
+    if totalindustryscore != 0:
+        print('{}:{}{}{}'.format(buildings[1],industryprint, ' = ',totalindustryscore))
+    elif totalindustryscore == 0:
+        print('{}:{}'.format(buildings[1], 0))
+        
+
+    return totalindustrycoin,totalindustryscore
+
+def commercialscore():
+    commercialscore = 0
+    totalcommercialcoin = 0
+    totalcommercialscore = 0
+    commercialposition = []
+    commerciallist = []
+    for column in range(len(map)):
+        for row in range(len(map)):
+            if map[row][column] == "C":
+                commercialposition.append([row,column])
+    for n in commercialposition:
+        if map[n[0] + 1][n[1]] == "C":
+            commercialscore += 1
+        if map[n[0]][n[1] + 1] == "C":
+            commercialscore += 1
+        if map[n[0] - 1][n[1]] == "C":
+            commercialscore += 1
+        if map[n[0]][n[1] - 1] == "C":
+            commercialscore += 1
+        commerciallist.append(commercialscore)
+        commercialscore -= commercialscore
+    for x in commercialposition:
+        if map[n[0] + 1][n[1]] == "R":
+            totalcommercialcoin += 1
+        if map[n[0]][n[1] + 1] == "R":
+            totalcommercialcoin += 1
+        if map[n[0] - 1][n[1]] == "R":
+            totalcommercialcoin += 1
+        if map[n[0]][n[1] - 1] == "R":
+            totalcommercialcoin += 1
+    
+    for t in commerciallist:
+        totalcommercialscore += t
+    commercialprint = ' + '.join(str(s) for s in commerciallist)
+    if totalcommercialscore != 0:
+        print('{}:{}{}{}'.format(buildings[2],commercialprint, ' = ',totalcommercialscore))
+    elif totalcommercialscore == 0:
+        print('{}:{}'.format(buildings[2], 0))
+
+    return totalcommercialcoin,totalcommercialscore
+
+def parkscore():
+    parkscore = 0
+    totalparkscore = 0
+    parkposition = []
+    parklist = []
+    for column in range(len(map)):
+        for row in range(len(map)):
+            if map[row][column] == "O":
+                parkposition.append([row,column])
+    for n in parkposition:
+        if map[n[0] + 1][n[1]] == "O":
+            parkscore += 1
+        if map[n[0]][n[1] + 1] == "O":
+            parkscore += 1
+        if map[n[0] - 1][n[1]] == "O":
+            parkscore += 1
+        if map[n[0]][n[1] - 1] == "O":
+            parkscore += 1
+        parklist.append(parkscore)
+        parkscore -= parkscore
+    
+    for t in parklist:
+        totalparkscore += t
+    parkprint = ' + '.join(str(s) for s in parklist)
+    if totalparkscore != 0:
+        print('{}:{}{}{}'.format(buildings[3],parkprint, ' = ',totalparkscore))
+    elif totalparkscore == 0:
+        print('{}:{}'.format(buildings[3], 0))
+
+    return totalparkscore
 
 def roadscore():
     roadscore = 0
