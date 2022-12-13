@@ -203,8 +203,6 @@ def viewcurrentscore(totalroadscore, totalparkscore, totalcommercialscore, total
 def rungame(list_options):
     p = 0
     while p < 1:
-        print("{:17}{}".format("Turn Number: ", turn))
-        print("{:17}{}".format("Coins Remaining: ", totalcoin))
         print()
         print("Choose one.")
         print('Select your building to place')
@@ -297,10 +295,12 @@ def placebuildings(selected, turn, totalcoin):
                 else:
                     print("You have selected a location with a building already.\n")
                     continue
-    return map
+    return map, turn, totalcoin
 
 
-def printmap():
+def printmap(turn, totalcoin):
+    print("{:17}{}".format("Turn Number: ", turn))
+    print("{:17}{}".format("Coins Remaining: ", totalcoin))
     print('{:5}{:5}{:5}{:5}{:5}{:5}{:5}{:5}{:5}{:5}{:5}{:5}{:5}{:5}{:5}{:5}{:5}{:5}{:5}{:5}{:5}'.format(
         ' ', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T'))
     print('-------------------------------------------------------------------------------------------------------')
@@ -326,11 +326,11 @@ def mainmenu():  # MAIN MENU FUNCTION ##
 
 
 def playgame(turn):
-    printmap()
+    printmap(turn, totalcoin)
     while turn > 0:
         placebuildings(rungame(generatebuildings()), turn, totalcoin)
         turn += 1
-        printmap()
+        printmap(turn, totalcoin)
 
 
 # while loop to run the game
