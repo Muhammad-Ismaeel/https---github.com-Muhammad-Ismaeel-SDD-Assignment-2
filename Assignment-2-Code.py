@@ -254,14 +254,6 @@ def industryscore():
                 industryposition.append([row,column])
     for n in industryposition:
         industryscore += 1
-        if map[n[0] + 1][n[1]] == "R":
-            totalindustrycoin += 1
-        if map[n[0]][n[1] + 1] == "R":
-            totalindustrycoin += 1
-        if map[n[0] - 1][n[1]] == "R":
-            totalindustrycoin += 1
-        if map[n[0]][n[1] - 1] == "R":
-            totalindustrycoin += 1
         industrylist.append(industryscore)
         industryscore -= industryscore
 
