@@ -172,6 +172,7 @@ while (i > 0):
         continue
 
 def parkscore():
+    parkscore = 0
     totalparkscore = 0
     parkposition = []
     parklist = []
@@ -181,13 +182,24 @@ def parkscore():
                 parkposition.append([row,column])
     for n in parkposition:
         if map[n[0] + 1][n[1]] == "O":
-            totalparkscore += 1
+            parkscore += 1
         if map[n[0]][n[1] + 1] == "O":
-            totalparkscore += 1
+            parkscore += 1
         if map[n[0] - 1][n[1]] == "O":
-            totalparkscore += 1
+            parkscore += 1
         if map[n[0]][n[1] - 1] == "O":
-            totalparkscore += 1
+            parkscore += 1
+        parklist.append(parkscore)
+        parkscore -= parkscore
+    
+    for t in parklist:
+        totalparkscore += t
+    parkprint = ' + '.join(str(s) for s in parklist)
+    if totalparkscore != 0:
+        print('{}:{}{}{}'.format(buildings[3],parkprint, ' = ',totalparkscore))
+    elif totalparkscore == 0:
+        print('{}:{}'.format(buildings[3], 0))
+
     return totalparkscore
 
 def highwayscore():
