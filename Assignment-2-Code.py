@@ -51,6 +51,15 @@ def placebuildings(selected, turn):
                 if map[player_row][player_column-1] != '   ' or map[player_row][player_column+1] != '   ' or map[player_row-1][player_column] != '   ' or map[player_row+1][player_column] != '   ':
                     if map[player_row][player_column] == '   ':
                         map[player_row][player_column] = selected
+                        if selected == 'C' or selected == "I":
+                            if map[player_row + 1][player_column] == 'R':
+                                totalcoin += 1
+                            if map[player_row][player_column + 1] == 'R':
+                                totalcoin += 1
+                            if map[player_row - 1][player_column] == 'R':
+                                totalcoin += 1
+                            if map[player_row][player_column - 1] == 'R':
+                                totalcoin += 1
                         break
                     else:
                         print(
@@ -152,7 +161,9 @@ while (i > 0):
                ['   ', '   ', '   ', '   ', '   ', '   ', '   ', '   ', '   ', '   ',
                 '   ', '   ', '   ', '   ', '   ', '   ', '   ', '   ', '   ', '   ']
                ]
-
+        totalcoin = 16
+        notcountedindustrycoins = []
+        notcountedcommercialcoins = []
         buildings = ['R  ', 'I  ', 'C  ', 'O  ', '*  ']
         letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I',
                    'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T']
@@ -263,11 +274,10 @@ def industryscore():
         print('{}:{}'.format(buildings[1], 0))
         
 
-    return totalindustrycoin,totalindustryscore
+    return totalindustryscore
 
 def commercialscore():
     commercialscore = 0
-    totalcommercialcoin = 0
     totalcommercialscore = 0
     commercialposition = []
     commerciallist = []
@@ -286,15 +296,6 @@ def commercialscore():
             commercialscore += 1
         commerciallist.append(commercialscore)
         commercialscore -= commercialscore
-    for x in commercialposition:
-        if map[n[0] + 1][n[1]] == "R":
-            totalcommercialcoin += 1
-        if map[n[0]][n[1] + 1] == "R":
-            totalcommercialcoin += 1
-        if map[n[0] - 1][n[1]] == "R":
-            totalcommercialcoin += 1
-        if map[n[0]][n[1] - 1] == "R":
-            totalcommercialcoin += 1
     
     for t in commerciallist:
         totalcommercialscore += t
@@ -304,7 +305,7 @@ def commercialscore():
     elif totalcommercialscore == 0:
         print('{}:{}'.format(buildings[2], 0))
 
-    return totalcommercialcoin,totalcommercialscore
+    return totalcommercialscore
 
 def parkscore():
     parkscore = 0
@@ -363,3 +364,37 @@ def roadscore():
         print('{}:{}'.format(buildings[4], 0))
 
     return totalroadscore
+
+# def coincounter():
+#     commercialcoinlist = []
+#     totalcommercialcoin = 0
+#     commercialcoin = 0
+#     commercialposition = []
+#     for column in range(len(map)):
+#         for row in range(len(map)):
+#             if map[row][column] == "C":
+#                 commercialposition.append([row,column])
+#     for n in commercialposition:
+#         if map[n[0] + 1][n[1]] == "R":
+#             commercialcoin += 1
+#         if map[n[0]][n[1] + 1] == "R":
+#             commercialcoin += 1
+#         if map[n[0] - 1][n[1]] == "R":
+#             commercialcoin += 1
+#         if map[n[0]][n[1] - 1] == "R":
+#             commercialcoin += 1
+#         commercialcoinlist.append(commercialcoin)
+#         notcountedcommercialcoins.append(commercialcoin)
+#         commercialcoin -= commercialcoin
+#     setcommercial1 = set(commercialcoinlist)
+#     setcommercial2 = set(notcountedcommercialcoins)
+#     commercialcoinsimilarities = setcommercial1.intersection(setcommercial2)
+#     commercialcoinsimilaritieslist = list(commercialcoinsimilaritieslist)
+#     for n in commercialcoinsimilaritieslist:
+#         totalcommercialcoin += n
+#         notcountedcommercialcoins.remove(n)
+
+    
+
+    
+        
