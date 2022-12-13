@@ -288,3 +288,19 @@ def residentialscore():
             totalresidentialscore += 2
             
     return totalresidentialscore
+
+def roadscore():
+    totalroadscore = 0
+    roadposition = []
+    roadlist = []
+    for column in range(len(map)):
+        for row in range(len(map)):
+            if map[row][column] == "*":
+                roadposition.append([row,column])
+    for n in roadposition:
+        if map[n[0] + 1][n[1]] == "*":
+            totalroadscore += 1
+        if map[n[0] - 1][n[1]] == "*":
+            totalroadscore += 1
+
+    return totalroadscore
