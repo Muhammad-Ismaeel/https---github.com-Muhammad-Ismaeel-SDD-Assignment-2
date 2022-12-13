@@ -172,7 +172,7 @@ while (i > 0):
         continue
 
 def highwayscore():
-        totalhighwayscore = 0;
+        totalhighwayscore = 0
         highwayposition = []
         highwaylist = []
         for column in range(len(map)):
