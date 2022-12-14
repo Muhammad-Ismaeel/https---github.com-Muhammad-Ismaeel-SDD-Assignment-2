@@ -10,7 +10,7 @@ def generatebuildings():
     buildings_1.pop(to_pop)
     second_opt = buildings_1[random.randint(0, 3)]
     list_options = [first_opt, second_opt]
-    buildings_1 = ['R', 'I', 'C', 'O', '*']
+    buildings_1 = ['R  ', 'I  ', 'C  ', 'O  ', '*  ']
     return list_options
 
 
@@ -47,14 +47,14 @@ def residentialscore():
         residentiallist.append(residentialscore)
         residentialscore -= residentialscore
 
-    for t in residentiallist:
-        totalresidentialscore += t
-    residentialprint = ' + '.join(str(s) for s in residentiallist)
-    if totalresidentialscore != 0:
-        print('{}:{}{}{}'.format(
-            buildings[0], residentialprint, ' = ', totalresidentialscore))
-    elif totalresidentialscore == 0:
-        print('{}:{}'.format(buildings[0], 0))
+# for t in residentiallist:
+##        totalresidentialscore += t
+##    residentialprint = ' + '.join(str(s) for s in residentiallist)
+# if totalresidentialscore != 0:
+# print('{}:{}{}{}'.format(
+# buildings[0], residentialprint, ' = ', totalresidentialscore))
+# elif totalresidentialscore == 0:
+##        print('{}:{}'.format(buildings[0], 0))
 
     return totalresidentialscore
 
@@ -74,14 +74,14 @@ def industryscore():
         industrylist.append(industryscore)
         industryscore -= industryscore
 
-    for t in industrylist:
-        totalindustryscore += t
-    industryprint = ' + '.join(str(s) for s in industrylist)
-    if totalindustryscore != 0:
-        print('{}:{}{}{}'.format(
-            buildings[1], industryprint, ' = ', totalindustryscore))
-    elif totalindustryscore == 0:
-        print('{}:{}'.format(buildings[1], 0))
+# for t in industrylist:
+##       totalindustryscore += t
+##    industryprint = ' + '.join(str(s) for s in industrylist)
+# if totalindustryscore != 0:
+# print('{}:{}{}{}'.format(
+# buildings[1], industryprint, ' = ', totalindustryscore))
+# elif totalindustryscore == 0:
+##        print('{}:{}'.format(buildings[1], 0))
 
     return totalindustryscore
 
@@ -107,14 +107,14 @@ def commercialscore():
         commerciallist.append(commercialscore)
         commercialscore -= commercialscore
 
-    for t in commerciallist:
-        totalcommercialscore += t
-    commercialprint = ' + '.join(str(s) for s in commerciallist)
-    if totalcommercialscore != 0:
-        print('{}:{}{}{}'.format(
-            buildings[2], commercialprint, ' = ', totalcommercialscore))
-    elif totalcommercialscore == 0:
-        print('{}:{}'.format(buildings[2], 0))
+# for t in commerciallist:
+##        totalcommercialscore += t
+##    commercialprint = ' + '.join(str(s) for s in commerciallist)
+# if totalcommercialscore != 0:
+# print('{}:{}{}{}'.format(
+# buildings[2], commercialprint, ' = ', totalcommercialscore))
+# elif totalcommercialscore == 0:
+##        print('{}:{}'.format(buildings[2], 0))
 
     return totalcommercialscore
 
@@ -140,14 +140,14 @@ def parkscore():
         parklist.append(parkscore)
         parkscore -= parkscore
 
-    for t in parklist:
-        totalparkscore += t
-    parkprint = ' + '.join(str(s) for s in parklist)
-    if totalparkscore != 0:
-        print('{}:{}{}{}'.format(
-            buildings[3], parkprint, ' = ', totalparkscore))
-    elif totalparkscore == 0:
-        print('{}:{}'.format(buildings[3], 0))
+# for t in parklist:
+##        totalparkscore += t
+##    parkprint = ' + '.join(str(s) for s in parklist)
+# if totalparkscore != 0:
+# print('{}:{}{}{}'.format(
+# buildings[3], parkprint, ' = ', totalparkscore))
+# elif totalparkscore == 0:
+##        print('{}:{}'.format(buildings[3], 0))
 
     return totalparkscore
 
@@ -169,14 +169,14 @@ def roadscore():
         roadlist.append(roadscore)
         roadscore -= roadscore
 
-    for t in roadlist:
-        totalroadscore += t
-    roadprint = ' + '.join(str(s) for s in roadlist)
-    if totalroadscore != 0:
-        print('{}:{}{}{}'.format(
-            buildings[4], roadprint, ' = ', totalroadscore))
-    elif totalroadscore == 0:
-        print('{}:{}'.format(buildings[4], 0))
+# for t in roadlist:
+##        totalroadscore += t
+##    roadprint = ' + '.join(str(s) for s in roadlist)
+# if totalroadscore != 0:
+# print('{}:{}{}{}'.format(
+# buildings[4], roadprint, ' = ', totalroadscore))
+# elif totalroadscore == 0:
+##        print('{}:{}'.format(buildings[4], 0))
 
     return totalroadscore
 
@@ -270,14 +270,15 @@ def placebuildings(selected, turn, totalcoin):
                     if map[player_row][player_column] == '   ':
                         map[player_row][player_column] = selected
                         totalcoin -= 1
-                        if selected == 'C' or selected == "I":
-                            if map[player_row + 1][player_column] == 'R':
+                        turn += 1
+                        if selected == 'C  ' or selected == "I  ":
+                            if map[player_row + 1][player_column] == 'R  ':
                                 totalcoin += 1
-                            if map[player_row][player_column + 1] == 'R':
+                            if map[player_row][player_column + 1] == 'R  ':
                                 totalcoin += 1
-                            if map[player_row - 1][player_column] == 'R':
+                            if map[player_row - 1][player_column] == 'R  ':
                                 totalcoin += 1
-                            if map[player_row][player_column - 1] == 'R':
+                            if map[player_row][player_column - 1] == 'R  ':
                                 totalcoin += 1
                         break
                     else:
@@ -290,6 +291,8 @@ def placebuildings(selected, turn, totalcoin):
             else:
                 if map[player_row][player_column] == '   ':
                     map[player_row][player_column] = selected
+                    totalcoin -= 1
+                    turn += 1
 
                     break
                 else:
@@ -325,11 +328,14 @@ def mainmenu():  # MAIN MENU FUNCTION ##
     print('0. Exit')
 
 
-def playgame(turn):
+def playgame(turn, totalcoin):
     printmap(turn, totalcoin)
     while turn > 0:
-        placebuildings(rungame(generatebuildings()), turn, totalcoin)
-        turn += 1
+        variables = placebuildings(
+            rungame(generatebuildings()), turn, totalcoin)
+        map = variables[0]
+        turn = variables[1]
+        totalcoin = variables[2]
         printmap(turn, totalcoin)
 
 
@@ -388,7 +394,7 @@ while (i > 0):
         letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I',
                    'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T']
         turn = 1
-        playgame(turn)
+        playgame(turn, totalcoin)
     elif choice == 2:
         print("Game Loaded!")
         print()
@@ -403,21 +409,21 @@ while (i > 0):
         continue
 
 
-def highwayscore():
-    totalhighwayscore = 0
-    highwayposition = []
-    highwaylist = []
-    for column in range(len(map)):
-        for row in range(len(map)):
-            if map[row][column] == "*":
-                highwayposition.append([row, column])
-                for h in highwayposition:
-                    HWYcount = 0
-                    while map[player_row][player_column+HWYcount] == "*":
-                        HWYcount_score += 1
-                        HWY_score = HWYcount
-                totalhighwayscore = totalhighwayscore + HWY_score
-    return totalhighwayscore
+# def highwayscore():
+#     totalhighwayscore = 0
+#     highwayposition = []
+#     highwaylist = []
+#     for column in range(len(map)):
+#         for row in range(len(map)):
+#             if map[row][column] == "*":
+#                 highwayposition.append([row, column])
+#                 for h in highwayposition:
+#                     HWYcount = 0
+#                     while map[player_row][player_column+HWYcount] == "*":
+#                         HWYcount_score += 1
+#                         HWY_score = HWYcount
+#                 totalhighwayscore = totalhighwayscore + HWY_score
+#     return totalhighwayscore
 
 
 # def coincounter():
