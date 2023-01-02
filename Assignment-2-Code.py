@@ -182,6 +182,13 @@ def roadscore():
 
 
 def savegame():
+    # VARIABLES TO BE SAVED ###
+    list_save = [map, turn, totalcoin, list_options]
+
+    datafile = open("saved-game.txt", 'w')
+
+    datafile.write(str(list_save))
+    datafile.close()
     print('Game Saved!')
 
 
@@ -331,12 +338,10 @@ def mainmenu():  # MAIN MENU FUNCTION ##
 def playgame(turn, totalcoin):
     printmap(turn, totalcoin)
     while turn > 0:
-        variables = placebuildings(
-            rungame(generatebuildings()), turn, totalcoin)
-        map = variables[0]
-        turn = variables[1]
-        totalcoin = variables[2]
+        list_options = generatebuildings()
+        placebuildings(rungame(list_options), turn, totalcoin)
         printmap(turn, totalcoin)
+        return list_options
 
 
 # while loop to run the game
@@ -399,7 +404,7 @@ while (i > 0):
         print("Game Loaded!")
         print()
     elif choice == 3:
-        print("Here are your high scores!")
+        print("Here are the high scores!")
         print()
     elif choice == 0:
         print("Goodbye!")
