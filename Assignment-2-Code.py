@@ -181,7 +181,27 @@ def roadscore():
     return totalroadscore
 
 
-def savegame():
+def highscore(name, score, hs_list, name_list):
+    # remove the last name and score because they already qualify for the criteria
+
+    hs_list.remove(hs_list[-1])
+    name_list.remove(name_list[-1])
+
+    # check which of the highest scores does the current score beat
+    for high in hs_list:
+        if score > high:
+            index = hs_list.index(high)
+            # find index of that highscore
+
+            break
+            # end the loop so it does not find an index below the desired one
+
+    # insert the name and score in the desired position
+    hs_list.insert(index, score)
+    name_list.insert(index, name)
+
+
+def savegame(list_options):
     # VARIABLES TO BE SAVED ###
     list_save = [map, turn, totalcoin, list_options]
 
@@ -341,6 +361,51 @@ def playgame(turn, totalcoin):
         list_options = generatebuildings()
         placebuildings(rungame(list_options), turn, totalcoin)
         printmap(turn, totalcoin)
+        if totalcoin == 0:
+            score = viewcurrentscore(roadscore(), parkscore(
+            ), commercialscore(), industryscore(), residentialscore())
+        datafile = open("highscores.txt", 'r')
+        for line in datafile:
+            highscores_list = line.strip('\"')
+        datafile.close()
+
+        ### CLEANING DATA EXTRACTED FROM THE FILE ###
+        highscores_list = eval(highscores_list)
+        highscores_list = list(highscores_list)
+
+        ### EQUATING THE NAME_lIST AND SCORE_LIST FROM THE FILE###
+
+        name_list = highscores_list[0]
+        hs_list = highscores_list[1]
+
+########### EDITING AND PRINTING HIGHSCORES ##################
+
+        if score > hs_list[-1]:
+            print('Congratulations! You made it to the high score board!')
+            name = input('Please enter you name(MAX 20 characters): ')
+
+            ### CALL HIGHSCORE FUNCTION ###
+            highscore(name, score, hs_list, name_list)
+
+            ### PRINTING OF HIGHSCORES ###
+
+            print('--------- HIGH SCORES ---------')
+            print('{:4}{:<20}{:>6}'.format('Pos', 'Name', 'Score'))
+            print('{:4}{:<20}{:>6}'.format('---', '----', '-----'))
+            print()
+            for i in range(len(name_list)):
+                print('{:>2}{:2}{:<19}{:>6}'.format(
+                    i+1, '. ', name_list[i], hs_list[i]))
+            print('-------------------------------')
+            print()
+
+            ### EDITING THE NOTEPAD FILE WITH THE UPDATES SCORES AND NAMES ###
+
+            write_list = [name_list, hs_list]
+            path = "C:\\Users\\ismae\\Downloads\\PRG1\\"
+            datafile = open(path + "highscores.txt", 'w')
+            datafile.write(str(write_list))
+            datafile.close()
         return list_options
 
 
