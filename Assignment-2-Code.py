@@ -1,5 +1,6 @@
 ## SDD ASSIGNMENT 2 ##
 import random
+from ast import literal_eval
 import sys
 
 
@@ -7,20 +8,17 @@ def generatebuildings(turn):
     datafile = open("saved-game.txt", 'r')
     scorelist = []
     for line in datafile:
-        scorelist.append(line.split(","))
+        scorelist = literal_eval(line)
     datafile.close()
-    print(scorelist)
-
-    if scorelist == "" or turn:
+    if scorelist != "" and scorelist[1] <= turn:
+        list_options = [scorelist[3][0], scorelist[3][1]]
+    else:
         buildings_1 = ['R  ', 'I  ', 'C  ', 'O  ', '*  ']
         first_opt = buildings[random.randint(0, 4)]
         to_pop = buildings_1.index(first_opt)
         buildings_1.pop(to_pop)
         second_opt = buildings_1[random.randint(0, 3)]
         list_options = [first_opt, second_opt]
-        buildings_1 = ['R  ', 'I  ', 'C  ', 'O  ', '*  ']
-    else:
-        list_options = [scorelist[2], scorelist[4]]
 
     return list_options
 
@@ -65,7 +63,7 @@ def residentialscore():
 # print('{}:{}{}{}'.format(
 # buildings[0], residentialprint, ' = ', totalresidentialscore))
 # elif totalresidentialscore == 0:
-##        print('{}:{}'.format(buildings[0], 0))
+#        print('{}:{}'.format(buildings[0], 0))
 
     return totalresidentialscore
 
@@ -336,6 +334,7 @@ def placebuildings(selected, turn, totalcoin):
                 else:
                     print("You have selected a location with a building already.\n")
                     continue
+
     return map, turn, totalcoin
 
 
@@ -381,43 +380,39 @@ def playgame(turn, totalcoin):
         datafile.close()
 
         ### CLEANING DATA EXTRACTED FROM THE FILE ###
-       # highscores_list = eval(highscores_list)
-       # highscores_list = list(highscores_list)
+        highscores_list = eval(highscores_list)
+        highscores_list = list(highscores_list)
 
         ### EQUATING THE NAME_lIST AND SCORE_LIST FROM THE FILE###
 
-       # name_list = highscores_list[0]
-       # hs_list = highscores_list[1]
+        name_list = highscores_list[0]
+        hs_list = highscores_list[1]
 
-########### EDITING AND PRINTING HIGHSCORES ##################
+########## EDITING AND PRINTING HIGHSCORES ##################
 
-        # if score > hs_list[-1]:
-        #    print('Congratulations! You made it to the high score board!')
-        #   name = input('Please enter you name(MAX 20 characters): ')
+        if score > hs_list[-1]:
+            print('Congratulations! You made it to the high score board!')
+            name = input('Please enter you name(MAX 20 characters): ')
+        ## CALL HIGHSCORE FUNCTION ###
 
-        ### CALL HIGHSCORE FUNCTION ###
-        #  highscore(name, score, hs_list, name_list)
+        ## PRINTING OF HIGHSCORES ###
+        print('--------- HIGH SCORES ---------')
+        print('{:4}{:<20}{:>6}'.format('Pos', 'Name', 'Score'))
+        print('{:4}{:<20}{:>6}'.format('---', '----', '-----'))
+        print()
+        for i in range(len(name_list)):
+            print('{:>2}{:2}{:<19}{:>6}'.format(
+                i+1, '. ', name_list[i], hs_list[i]))
+        print('-------------------------------')
+        print()
 
-        ### PRINTING OF HIGHSCORES ###
+        ## EDITING THE NOTEPAD FILE WITH THE UPDATES SCORES AND NAMES ###
 
-        #    print('--------- HIGH SCORES ---------')
-        #    print('{:4}{:<20}{:>6}'.format('Pos', 'Name', 'Score'))
-        #    print('{:4}{:<20}{:>6}'.format('---', '----', '-----'))
-        #    print()
-        #    for i in range(len(name_list)):
-        #        print('{:>2}{:2}{:<19}{:>6}'.format(
-        #            i+1, '. ', name_list[i], hs_list[i]))
-        #   print('-------------------------------')
-        #  print()
-
-        ### EDITING THE NOTEPAD FILE WITH THE UPDATES SCORES AND NAMES ###
-
-        # write_list = [name_list, hs_list]
-        #path = "C:\\Users\\ismae\\Downloads\\PRG1\\"
-        # datafile = open(path + "highscores.txt", 'w')
-        # datafile.write(str(write_list))
-        # datafile.close()
-        # return list_options
+        write_list = [name_list, hs_list]
+        datafile = open("highscores.txt", 'w')
+        datafile.write(str(write_list))
+        datafile.close()
+        return list_options
 
 
 # while loop to run the game
